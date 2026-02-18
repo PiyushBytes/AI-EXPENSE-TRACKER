@@ -1,0 +1,160 @@
+# AI Expense Tracker – Technical Blueprint (PLAN.md)
+
+## 1. Product Overview
+*   **Product Name**: AI Expense Tracker
+*   **Target Users (MVP)**: 500 active users (Students, freelancers, young professionals)
+*   **Platform**: Web-first (Mobile-responsive), with future mobile app support
+
+## 2. Core Problem
+Most people:
+*   Forget to track expenses
+*   Don't understand spending patterns
+*   Struggle to categorize transactions
+*   Cannot predict monthly cash flow
+*   Lack financial discipline
+*   Manual entry apps feel boring and require effort.
+
+## 3. Core Value Proposition
+This AI Expense Tracker will:
+*   ✅ Automatically categorize expenses using AI
+*   📊 Generate smart insights (where money leaks)
+*   📈 Predict monthly spending
+*   💡 Suggest saving improvements
+*   🧠 Learn user behavior over time
+*   💬 Allow natural language entry ("Spent 250 on coffee at Starbucks")
+
+## 4. User Flows
+
+### Authenticated Flow
+1.  User visits landing page -> "Get Started"
+2.  Sign up via Email+Password or Google OAuth
+3.  Onboarding: Monthly Income, Saving Goal, Currency
+4.  Redirect to Dashboard
+
+### Add Expense Flow (Manual)
+1.  Click "Add Expense"
+2.  Enter Amount, Description, Date
+3.  AI Auto-categorizes -> User Confirms/Edits
+4.  Save -> Update Dashboard Instantly
+
+### Natural Language Entry Flow
+1.  User types: "Paid 800 for electricity bill"
+2.  NLP Parser Extracts: Amount (800), Category (Utilities), Date (Today)
+3.  Confirmation Modal -> Save Transaction
+
+### Dashboard Flow
+1.  Backend fetches: Monthly expenses, Breakdown, AI Insights
+2.  Display: Pie Chart, Line Graph, Smart Suggestions
+
+### AI Insight Flow
+1.  User has >= 20 transactions
+2.  AI runs weekly analysis for patterns (High spending, subscriptions, budget breach)
+3.  Generate advice -> Show in "Insights" tab
+
+## 5. System Architecture
+**Frontend (Next.js)** -> **API Layer (Node.js/NestJS)** -> **Business Logic** -> **Database (PostgreSQL)** -> **AI Service** -> **Redis Cache**
+
+*   **Frontend**: Dashboard, Auth, Add Transaction UI, Charts (Communicates via REST)
+*   **Backend Modules**: Auth, User, Transactions, Categories, AI Insights, Analytics
+*   **Database**: PostgreSQL (Primary), Redis (Cache)
+*   **AI Layer**: NLP parsing, Categorization, Pattern Analysis, Prediction
+
+## 6. Tech Stack
+*   **Frontend**: Next.js (React), TailwindCSS, Recharts/Chart.js
+*   **Backend**: Node.js + NestJS (Scalable, TypeScript)
+*   **Database**: PostgreSQL (Relational, ACID), Redis (Caching)
+*   **AI**: OpenAI API (Initial), Custom ML (Future)
+
+## 7. Database Schema
+
+### Users
+| Field | Type |
+| :--- | :--- |
+| id | UUID |
+| email | VARCHAR |
+| password_hash | TEXT |
+| name | VARCHAR |
+| monthly_income | DECIMAL |
+| currency | VARCHAR |
+| created_at | TIMESTAMP |
+
+### Transactions
+| Field | Type |
+| :--- | :--- |
+| id | UUID |
+| user_id | UUID (FK) |
+| amount | DECIMAL |
+| description | TEXT |
+| category_id | UUID |
+| date | DATE |
+| created_at | TIMESTAMP |
+
+### Categories
+| Field | Type |
+| :--- | :--- |
+| id | UUID |
+| name | VARCHAR |
+| type | ENUM (expense/income) |
+
+### Insights
+| Field | Type |
+| :--- | :--- |
+| id | UUID |
+| user_id | UUID |
+| content | TEXT |
+| created_at | TIMESTAMP |
+
+### Budgets (Phase 2)
+| Field | Type |
+| :--- | :--- |
+| id | UUID |
+| user_id | UUID |
+| category_id | UUID |
+| limit_amount | DECIMAL |
+
+## 8. API Contracts
+*   **Auth**: `POST /auth/register`, `POST /auth/login`
+*   **Transactions**: `POST /transactions` (Add), `GET /dashboard?month=...` (View)
+*   **AI**: `POST /ai/parse` (Natural Language Input)
+
+## 9. Authentication & Security
+*   **Auth**: JWT (15 min access, 7 day refresh), HTTP-only cookies
+*   **Security**: HTTPS, CSRF, CORS, Input Validation (class-validator), SQL Injection prevention (ORM)
+
+## 10. Integrations
+*   OpenAI API (NLP/Insights)
+*   Google OAuth
+*   Stripe (Phase 3)
+*   Email Service (Resend/SendGrid)
+
+## 11. Scalability Plan
+*   **MVP (500 users)**: Single server, Managed Postgres
+*   **Growth (5k users)**: Docker, Load Balancer, Read Replicas
+*   **Scale (50k users)**: Microservices, Background Jobs (BullMQ), Event-Driven
+
+## 12. Folder Structure
+```
+Frontend/
+  /app (dashboard, transactions, auth)
+  /components
+  /lib, /hooks, /services, /utils
+
+Backend/
+  /src/modules (auth, users, transactions, categories, ai, dashboard)
+  /common
+  /config
+  main.ts
+```
+
+## 13. Build Phases
+*   **Phase 1 (Foundation)**: Setup, Auth, DB Schema, Basic Dashboard, Manual Entry
+*   **Phase 2 (AI Integration)**: NLP Parsing, Auto-categorization, Insights, Redis
+*   **Phase 3 (Smart Analytics)**: Trends, Budget Alerts, Email Insights
+*   **Phase 4 (Monetization)**: Premium, Stripe, Forecasting
+
+## 14. Future Roadmap
+*   Mobile App (React Native)
+*   Bank API (Plaid)
+*   Voice Assistant
+*   Family Accounts
+*   Investment Tracking

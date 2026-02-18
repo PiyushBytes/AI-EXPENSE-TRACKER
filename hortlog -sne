@@ -1,0 +1,44 @@
+[33mcommit c21c0eb690714589def62cb8abb993441ddffd2d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: PiyushBytes <dawnpiyush384@gmail.com>
+Commit: PiyushBytes <dawnpiyush384@gmail.com>
+
+    Saving work
+
+[33mcommit 7cae48a4e9bbbbad368c34e9f06706984dcd8ca6[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: PiyushBytes <dawnpiyush384@gmail.com>
+Commit: PiyushBytes <dawnpiyush384@gmail.com>
+
+    Add build fix documentation
+
+[33mcommit 76fad2247f126496a2df88eff40261f51b4ccc66[m
+Author: PiyushBytes <dawnpiyush384@gmail.com>
+Commit: PiyushBytes <dawnpiyush384@gmail.com>
+
+    Fix Vercel build: Update dependencies for React 18 compatibility
+
+[33mcommit 7891260b61619d67813e71d97195a5af81a00f7a[m
+Author: PiyushBytes <dawnpiyush384@gmail.com>
+Commit: PiyushBytes <dawnpiyush384@gmail.com>
+
+    Add Vercel deployment instructions
+
+[33mcommit 398a6fecb5ebdb71dbea7d10117dd440c14117b7[m
+Author: PiyushBytes <dawnpiyush384@gmail.com>
+Commit: PiyushBytes <dawnpiyush384@gmail.com>
+
+    Add Vercel configuration
+
+[33mcommit b1e1473122bd1deb768cc7953ab818a7fe55ab9f[m
+Author: PiyushBytes <dawnpiyush384@gmail.com>
+Commit: PiyushBytes <dawnpiyush384@gmail.com>
+
+    Initial commit: Complete ExpenseAI application
+    
+    Features:
+    - Frontend: Next.js 16 + TypeScript + Tailwind CSS
+    - Backend: NestJS + PostgreSQL + Redis
+    - AI Features: OpenAI integration
+    - Docker + CI/CD pipelines
+    - Production-ready deployment
+    
+    Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
